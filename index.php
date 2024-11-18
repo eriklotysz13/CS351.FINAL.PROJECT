@@ -52,12 +52,41 @@ $stmt = $pdo->query($sql);
 <body>
     <div class="hero">
         <h1>Erik's Prebuild Desktop PCs</h1>
-        <p>"Here you'll find what I think are the best desktop pcs for each purpose. Either you want a Gaming, Productivity and categorized by budget tiers!"</p>
+        <p>"Here you'll find what I think are the best desktop pcs for each purpose."</p>
     </div>
+
     <div class="search-bar">
+        <h3>Search by CPU:</h3>
         <form action="" method="GET">
-            <h3>Search by CPU:</h3>
-            <input type="text" name="query"/>
+            <input type="text" id="search" name="search"/>
             <button type="submit">Search</button>
         </form>
     </div>
+
+    <?php if (isset($_GET['search'])): ?>
+        <div>
+            <h3 style="margin: 40px">Search Results:</h3>
+            <?php if ($search_results && count($search_results) > 0): ?>
+                <div class="search-results">
+                        <?php foreach ($search_results as $row): ?>
+                        <div class="result-box">
+                            <p><strong>Entry ID:</strong> <?php echo htmlspecialchars($row['entry_id']); ?></p>
+                            <p><strong>CPU:</strong> <?php echo htmlspecialchars($row['cpu']); ?></p>
+                            <p><strong>GPU:</strong> <?php echo htmlspecialchars($row['gpu']); ?></p>
+                            <p><strong>RAM:</strong> <?php echo htmlspecialchars($row['ram']); ?></p>
+                            <form action="index.php" method="post">
+                                <input type="hidden" name="delete_id" value="<?php echo $row['entry_id']; ?>">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </div>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No systems found matching your search.</p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+</body>
+</html>
