@@ -28,7 +28,7 @@ try {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-// Handle book search
+// Handle systems search
 $search_results = null;
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search_term = '%' . $_GET['search'] . '%';
@@ -47,4 +47,17 @@ $stmt = $pdo->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Erik's Prebuild Desktop PCs</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+<body>
+    <div class="hero">
+        <h1>Erik's Prebuild Desktop PCs</h1>
+        <p>"Here you'll find what I think are the best desktop pcs for each purpose. Either you want a Gaming, Productivity and categorized by budget tiers!"</p>
+    </div>
+    <div class="search-bar">
+        <form action="" method="GET">
+            <h3>Search by CPU:</h3>
+            <input type="text" name="query"/>
+            <button type="submit">Search</button>
+        </form>
+    </div>
