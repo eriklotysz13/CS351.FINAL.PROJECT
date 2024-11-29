@@ -50,11 +50,14 @@ $stmt = $pdo->query($sql);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Hero section -->
     <div class="hero">
         <h1>Erik's Prebuild Desktop PCs</h1>
         <p>"Here you'll find what I think are the best desktop pcs for each purpose."</p>
+        <a href="mailto:erikdesktops@contact.com" class="hero-button">Contact Me</a>
     </div>
 
+    <!-- Search section and output -->
     <div class="search-bar">
         <h3>Search by CPU:</h3>
         <form action="" method="GET">
@@ -84,6 +87,38 @@ $stmt = $pdo->query($sql);
             <?php endif; ?>
         </div>
     <?php endif; ?>
+
+    <!-- Main table with systems -->
+    <div class="main-table-container">
+        <h2 style="margin: 20px">All Systems</h2>
+        <table class="main-table" style="margin: 20px">
+            <thead>
+                <tr>
+                    <th>ENTRY_ID</th>
+                    <th>CPU</th>
+                    <th>GPU</th>
+                    <th>RAM</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $stmt->fetch()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['entry_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['cpu']); ?></td>
+                    <td><?php echo htmlspecialchars($row['gpu']); ?></td>
+                    <td><?php echo htmlspecialchars($row['ram']); ?></td>
+                    <td>
+                        <form action="index.php" method="post" style="display:inline;">
+                            <input type="hidden" name="delete_id" value="<?php echo $row['entry_id']; ?>">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
