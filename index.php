@@ -64,24 +64,21 @@ $stmt = $pdo->query($sql);
     </div>
 
     <?php if (isset($_GET['search'])): ?>
-        <div>
-            <h3 style="margin: 40px">Search Results:</h3>
+        <h3 style="margin: 40px">Search Results:</h3>
+        <div class="search-results">
             <?php if ($search_results && count($search_results) > 0): ?>
-                <div class="search-results">
-                        <?php foreach ($search_results as $row): ?>
-                        <div class="result-box">
-                            <p><strong>Entry ID:</strong> <?php echo htmlspecialchars($row['entry_id']); ?></p>
-                            <p><strong>CPU:</strong> <?php echo htmlspecialchars($row['cpu']); ?></p>
-                            <p><strong>GPU:</strong> <?php echo htmlspecialchars($row['gpu']); ?></p>
-                            <p><strong>RAM:</strong> <?php echo htmlspecialchars($row['ram']); ?></p>
-                            <form action="index.php" method="post">
-                                <input type="hidden" name="delete_id" value="<?php echo $row['entry_id']; ?>">
-                                <input type="submit" value="Delete">
-                            </form>
-                        </div>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <?php foreach ($search_results as $row): ?>
+                    <div class="result-box">
+                        <p><strong>Entry ID:</strong> <?php echo htmlspecialchars($row['entry_id']); ?></p>
+                        <p><strong>CPU:</strong> <?php echo htmlspecialchars($row['cpu']); ?></p>
+                        <p><strong>GPU:</strong> <?php echo htmlspecialchars($row['gpu']); ?></p>
+                        <p><strong>RAM:</strong> <?php echo htmlspecialchars($row['ram']); ?></p>
+                        <form action="index.php" method="post">
+                            <input type="hidden" name="delete_id" value="<?php echo $row['entry_id']; ?>">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                <?php endforeach; ?>
             <?php else: ?>
                 <p>No systems found matching your search.</p>
             <?php endif; ?>
