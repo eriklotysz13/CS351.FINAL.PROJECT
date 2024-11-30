@@ -38,6 +38,27 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search_results = $search_stmt->fetchAll();
 }
 
+// Handle form submissions
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['cpu']) && isset($_POST['gpu']) && isset($_POST['ram'])) {
+        // Insert new entry
+        $cpu = htmlspecialchars($_POST['cpu']);
+        $gpu = htmlspecialchars($_POST['gpu']);
+        $ram = htmlspecialchars($_POST['ram']);
+        
+        $insert_sql = 'INSERT INTO systems (cpu, gpu, ram) VALUES (:cpu, :gpu, :ram)';
+        $stmt_insert = $pdo->prepare($insert_sql);
+        $stmt_insert->execute(['cpu' => $cpu, 'gpu' => $gpu, 'ram' => $ram]);
+    } elseif (isset($_POST['delete_id'])) {
+        // Delete an entry
+        $delete_id = (int) $_POST['delete_id'];
+        
+        $delete_sql = 'DELETE FROM systems WHERE entry_id = :entry_id';
+        $stmt_delete = $pdo->prepare($delete_sql);
+        $stmt_delete->execute(['entry_id' => $delete_id]);
+    }
+}
+
 $sql = 'SELECT entry_id, cpu, gpu, ram FROM systems';
 $stmt = $pdo->query($sql);
 ?>
@@ -90,7 +111,7 @@ $stmt = $pdo->query($sql);
 
     <!-- Main table with systems -->
     <div class="main-table-container">
-        <h2 style="margin: 20px">All Systems</h2>
+        <h2 style="margin: 20px">All Systems:</h2>
         <table class="main-table" style="margin: 20px">
             <thead>
                 <tr>
@@ -118,6 +139,23 @@ $stmt = $pdo->query($sql);
                 <?php endwhile; ?>
             </tbody>
         </table>
+    </div>
+
+    <!-- Add a system form -->
+    <div class="main-table-container">
+        <h2>Add your own System!</h2>
+        <form action="index.php" method="post">
+            <label for="cpu">CPU:</label>
+            <input type="text" id="cpu" name="cpu" required>
+            <br><br>
+            <label for="gpu">GPU:</label>
+            <input type="text" id="gpu" name="gpu" required>
+            <br><br>
+            <label for="ram">RAM:</label>
+            <input type="text" id="ram" name="ram" required>
+            <br><br>
+            <input type="submit" value="Add System">
+        </form>
     </div>
 
 </body>
