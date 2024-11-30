@@ -80,7 +80,7 @@ $stmt = $pdo->query($sql);
 
     <!-- Search section and output -->
     <div class="search-bar">
-        <h3>Search by CPU:</h3>
+        <h3 style="font-size: 28px">Search by CPU:</h3>
         <form method="GET">
             <input type="text" id="search" name="search"/>
             <button type="submit">Search</button>
@@ -88,7 +88,7 @@ $stmt = $pdo->query($sql);
     </div>
 
     <?php if (isset($_GET['search'])): ?>
-        <h3 style="margin: 40px">Search Results:</h3>
+        <h3 style="margin: 40px; font-size: 28px">Search Results:</h3>
         <div class="search-results">
             <?php if ($search_results && count($search_results) > 0): ?>
                 <?php foreach ($search_results as $row): ?>
