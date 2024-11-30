@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="auth-container">
-        <h1>Register</h1>
+        <h1>Erik's Prebuild Desktop PCs</h1>
+        <h1 style="font-size: 30px">Register</h1>
         <?php if ($error_message): ?>
             <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
         <?php endif; ?>

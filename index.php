@@ -73,15 +73,15 @@ $stmt = $pdo->query($sql);
 <body>
     <!-- Hero section -->
     <div class="hero">
-        <h1>Erik's Prebuild Desktop PCs</h1>
-        <p>"Here you'll find what I think are the best desktop pcs for each purpose."</p>
+        <h1 style="font-size: 60px">Erik's Prebuild Desktop PCs</h1>
+        <p style="font-size: 25px">"Here you'll find what I think are the best desktop PC combos."</p>
         <a href="mailto:erikdesktops@contact.com" class="hero-button">Contact Me</a>
     </div>
 
     <!-- Search section and output -->
     <div class="search-bar">
         <h3>Search by CPU:</h3>
-        <form action="" method="GET">
+        <form method="GET">
             <input type="text" id="search" name="search"/>
             <button type="submit">Search</button>
         </form>
