@@ -315,3 +315,103 @@ body {
 .service p {
     color: #d3e3fc;
 }
+
+.about-feedback {
+    padding: 40px 20px;
+    background-color: #1b345e;
+    text-align: center;
+}
+
+.about-feedback h2 {
+    color: #86a4d3;
+    margin-bottom: 20px;
+}
+
+.about-feedback p {
+    color: #d3e3fc;
+    margin-bottom: 20px;
+}
+
+.feedback-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: #12264f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-form .form-group {
+    margin-bottom: 15px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #d3e3fc;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #d3e3fc;
+    border-radius: 5px;
+    background-color: #0a1733;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.feedback-form button {
+    background-color: #0a1733;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-form button:hover {
+    background-color: #12264f;
+}
+
+/* Feedback section */
+.thank-you {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 40px;
+    background-color: #1b345e; /* Medium dark blue */
+    color: #ffffff; /* White text */
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.thank-you h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.thank-you p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4973c6; /* Lighter blue for contrast */
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #335ea8; /* Slightly darker blue on hover */
+}
