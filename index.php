@@ -40,22 +40,41 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['cpu']) && isset($_POST['gpu']) && isset($_POST['ram'])) {
-        // Insert new entry
+    if (isset($_POST['add_system'])) {
+        if (isset($_POST['cpu']) && isset($_POST['gpu']) && isset($_POST['ram'])) {
+            // Insert new entry
+            $cpu = htmlspecialchars($_POST['cpu']);
+            $gpu = htmlspecialchars($_POST['gpu']);
+            $ram = htmlspecialchars($_POST['ram']);
+            
+            $insert_sql = 'INSERT INTO systems (cpu, gpu, ram) VALUES (:cpu, :gpu, :ram)';
+            $stmt_insert = $pdo->prepare($insert_sql);
+            $stmt_insert->execute(['cpu' => $cpu, 'gpu' => $gpu, 'ram' => $ram]);
+        } elseif (isset($_POST['delete_id'])) {
+            // Delete an entry
+            $delete_id = (int) $_POST['delete_id'];
+            
+            $delete_sql = 'DELETE FROM systems WHERE entry_id = :entry_id';
+            $stmt_delete = $pdo->prepare($delete_sql);
+            $stmt_delete->execute(['entry_id' => $delete_id]);
+        }
+    }
+
+    // Handle update action
+    if (isset($_POST['update_id'])) { 
+        $update_id = (int)$_POST['update_id'];
         $cpu = htmlspecialchars($_POST['cpu']);
         $gpu = htmlspecialchars($_POST['gpu']);
         $ram = htmlspecialchars($_POST['ram']);
         
-        $insert_sql = 'INSERT INTO systems (cpu, gpu, ram) VALUES (:cpu, :gpu, :ram)';
-        $stmt_insert = $pdo->prepare($insert_sql);
-        $stmt_insert->execute(['cpu' => $cpu, 'gpu' => $gpu, 'ram' => $ram]);
-    } elseif (isset($_POST['delete_id'])) {
-        // Delete an entry
-        $delete_id = (int) $_POST['delete_id'];
-        
-        $delete_sql = 'DELETE FROM systems WHERE entry_id = :entry_id';
-        $stmt_delete = $pdo->prepare($delete_sql);
-        $stmt_delete->execute(['entry_id' => $delete_id]);
+        $update_sql = 'UPDATE systems SET cpu = :cpu, gpu = :gpu, ram = :ram WHERE entry_id = :entry_id';
+        $stmt_update = $pdo->prepare($update_sql);
+        $stmt_update->execute([
+            'cpu' => $cpu,
+            'gpu' => $gpu,
+            'ram' => $ram,
+            'entry_id' => $update_id,
+        ]);
     }
 }
 
@@ -130,6 +149,22 @@ $stmt = $pdo->query($sql);
                     <td><?php echo htmlspecialchars($row['gpu']); ?></td>
                     <td><?php echo htmlspecialchars($row['ram']); ?></td>
                     <td>
+                        <button type="button" onclick="document.getElementById('update-form-<?php echo $row['entry_id']; ?>').style.display = 'block';">Update</button>
+                        <div id="update-form-<?php echo $row['entry_id']; ?>" style="display:none;">
+                            <form action="index.php" method="post">
+                                <input type="hidden" name="update_id" value="<?php echo $row['entry_id']; ?>">
+                                <label for="cpu-<?php echo $row['entry_id']; ?>">CPU:</label>
+                                <input type="text" id="cpu-<?php echo $row['entry_id']; ?>" name="cpu" value="<?php echo htmlspecialchars($row['cpu']); ?>" required>
+                                <br>
+                                <label for="gpu-<?php echo $row['entry_id']; ?>">GPU:</label>
+                                <input type="text" id="gpu-<?php echo $row['entry_id']; ?>" name="gpu" value="<?php echo htmlspecialchars($row['gpu']); ?>" required>
+                                <br>
+                                <label for="ram-<?php echo $row['entry_id']; ?>">RAM:</label>
+                                <input type="text" id="ram-<?php echo $row['entry_id']; ?>" name="ram" value="<?php echo htmlspecialchars($row['ram']); ?>" required>
+                                <br>
+                                <input type="submit" value="Update System">
+                            </form>
+                        </div>
                         <form action="index.php" method="post" style="display:inline;">
                             <input type="hidden" name="delete_id" value="<?php echo $row['entry_id']; ?>">
                             <input type="submit" value="Delete">
@@ -154,6 +189,7 @@ $stmt = $pdo->query($sql);
             <label for="ram">RAM:</label>
             <input type="text" id="ram" name="ram" required>
             <br><br>
+            <input type="hidden" name="add_system" value="1">
             <input type="submit" value="Add System">
         </form>
     </div>
