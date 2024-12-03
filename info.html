@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Menu bar -->
+    <nav class="top-bar">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="info.html">Info</a></li>
+        </ul>
+    </nav>
+
     <header class="info-header">
         <h1>Understanding PC Components</h1>
     </header>
@@ -38,6 +47,37 @@
                 <li>Workstation GPUs: Designed for professional applications like CAD and 3D rendering.</li>
             </ul>
         </div>
+    </section>
+
+    <!-- RAM Section -->
+    <section class="component-section ram-section">
+        <div class="text">
+            <h2>What is RAM?</h2>
+            <p>RAM (Random Access Memory) is a computer's short-term memory. It temporarily stores data that the CPU needs to access quickly. More RAM allows your computer to handle multiple tasks efficiently.</p>
+            <h3>Types of RAM:</h3>
+            <ul>
+                <li>DDR (Double Data Rate): The standard memory for most PCs.</li>
+                <li>SRAM (Static RAM): Used in cache memory for faster data access.</li>
+                <li>VRAM (Video RAM): Designed for GPUs to store graphical data.</li>
+            </ul>
+        </div>
+        <img src="ram.jpeg" alt="RAM" class="component-image" style="width: 500px; height: 250px;">
+    </section>
+
+    <!-- Intel vs AMD CPUs Section -->
+    <section class="component-section comparison-section">
+        <h2>AMD vs Intel CPUs</h2>
+        <div class="comparison">
+            <div class="comparison-item">
+                <h3>AMD CPUs</h3>
+                <p>AMD processors are known for their high single-core performance, which is crucial for gaming and applications that rely on fewer cores. They often lead in efficiency and thermal management, making them great for laptops. Their Ryzen series has significantly closed the gap with Intel in gaming performance.</p>
+            </div>
+            <div class="comparison-item">
+                <h3>Intel CPUs</h3>
+                <p>Intel processors excel in multi-core performance, offering great value for tasks like video editing, rendering, and multitasking. Intel CPUs are also a good option for gaming, but AMD's "Ryzen" series are ahead currently.</p>
+            </div>
+        </div>
+        <p class="summary">Both brands have their strengths and weaknesses. AMD is often favored for gaming, while Intel provides more cores for the price, ideal for productivity tasks.</p>
     </section>
 </body>
 </html>

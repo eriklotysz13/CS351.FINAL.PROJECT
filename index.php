@@ -90,6 +90,15 @@ $stmt = $pdo->query($sql);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Menu bar -->
+    <nav class="top-bar">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="info.html">Info</a></li>
+        </ul>
+    </nav>
+
     <!-- Hero section -->
     <div class="hero">
         <h1 style="font-size: 60px">Erik's Prebuild Desktop PCs</h1>
