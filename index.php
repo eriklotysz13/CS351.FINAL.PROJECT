@@ -142,7 +142,7 @@ $stmt = $pdo->query($sql);
     </div>
 
     <!-- Add a system form -->
-    <div class="main-table-container">
+    <div class="main-table-container" style="width: 30%;">
         <h2>Add your own System!</h2>
         <form action="index.php" method="post">
             <label for="cpu">CPU:</label>
