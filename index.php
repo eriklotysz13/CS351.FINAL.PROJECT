@@ -50,14 +50,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $insert_sql = 'INSERT INTO systems (cpu, gpu, ram) VALUES (:cpu, :gpu, :ram)';
             $stmt_insert = $pdo->prepare($insert_sql);
             $stmt_insert->execute(['cpu' => $cpu, 'gpu' => $gpu, 'ram' => $ram]);
-        } elseif (isset($_POST['delete_id'])) {
-            // Delete an entry
-            $delete_id = (int) $_POST['delete_id'];
-            
-            $delete_sql = 'DELETE FROM systems WHERE entry_id = :entry_id';
-            $stmt_delete = $pdo->prepare($delete_sql);
-            $stmt_delete->execute(['entry_id' => $delete_id]);
         }
+    }
+
+    // Delete an entry
+    if (isset($_POST['delete_id'])) {
+        $delete_id = (int) $_POST['delete_id'];
+        
+        $delete_sql = 'DELETE FROM systems WHERE entry_id = :entry_id';
+        $stmt_delete = $pdo->prepare($delete_sql);
+        $stmt_delete->execute(['entry_id' => $delete_id]);
     }
 
     // Handle update action
@@ -159,7 +161,7 @@ $stmt = $pdo->query($sql);
                     <td><?php echo htmlspecialchars($row['gpu']); ?></td>
                     <td><?php echo htmlspecialchars($row['ram']); ?></td>
                     <td>
-                        <button type="button" onclick="document.getElementById('update-form-<?php echo $row['entry_id']; ?>').style.display = 'block';">Update</button>
+                        <input type="button" value="Update" onclick="document.getElementById('update-form-<?php echo $row['entry_id']; ?>').style.display = 'block';">
                         <div id="update-form-<?php echo $row['entry_id']; ?>" style="display:none;">
                             <form action="index.php" method="post">
                                 <input type="hidden" name="update_id" value="<?php echo $row['entry_id']; ?>">
@@ -203,6 +205,5 @@ $stmt = $pdo->query($sql);
             <input type="submit" value="Add System">
         </form>
     </div>
-
 </body>
 </html>
